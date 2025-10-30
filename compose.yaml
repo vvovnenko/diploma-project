@@ -1,0 +1,43 @@
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./runtimes/nginx_phpfpm/nginx/nginx.Dockerfile
+    image: runtime_nginx
+    container_name: "nginx"
+    hostname: symfony7site
+    ports:
+      - '80:80'
+    networks:
+      - diploma-project
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '1gb'
+        reservations:
+          cpus: '1'
+          memory: '1gb'
+
+  phpfpm:
+    build:
+      context: .
+      dockerfile: ./runtimes/nginx_phpfpm/phpfpm/phpfpm.Dockerfile
+    image: runtime_phpfpm
+    container_name: "phpfpm"
+    ports:
+      - "9001:9001"
+    networks:
+      - diploma-project
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '1gb'
+        reservations:
+          cpus: '1'
+          memory: '1gb'
+
+networks:
+  diploma-project:
+    name: diploma-project
