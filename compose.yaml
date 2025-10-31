@@ -38,6 +38,44 @@ services:
           cpus: '1'
           memory: '1gb'
 
+  openswoole:
+    build:
+      context: .
+      dockerfile: ./runtimes/openswoole/openswoole.Dockerfile
+    image: diploma_openswoole
+    container_name: "diploma_openswoole"
+    ports:
+      - "8002:80"
+    networks:
+      - diploma-project
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '1gb'
+        reservations:
+          cpus: '1'
+          memory: '1gb'
+
+  swoole:
+    build:
+      context: .
+      dockerfile: runtimes/swoole/swoole.Dockerfile
+    image: diploma_swoole
+    container_name: "diploma_swoole"
+    ports:
+      - "8003:80"
+    networks:
+      - diploma-project
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '1gb'
+        reservations:
+          cpus: '1'
+          memory: '1gb'
+
 networks:
   diploma-project:
     name: diploma-project
