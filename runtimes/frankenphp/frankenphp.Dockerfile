@@ -21,7 +21,7 @@ COPY ./runtimes/frankenphp/Caddyfile /etc/caddy/Caddyfile
 RUN cp $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 COPY ./runtimes/frankenphp/php.ini $PHP_INI_DIR/conf.d/custom-php.ini
 
-COPY "." "/app"
+COPY "./project" "/app"
 
 RUN cd /app && \
     cp .env.example .env.local && \

@@ -22,7 +22,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 COPY ./runtimes/swoole/php.ini /usr/local/etc/php/conf.d/custom-php.ini
 
-COPY "." "/var/www/symfony"
+COPY "./project" "/var/www/symfony"
 
 WORKDIR /var/www/symfony
 

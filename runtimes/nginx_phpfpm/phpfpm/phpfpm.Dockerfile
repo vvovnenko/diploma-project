@@ -18,7 +18,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
         zip && \
     install-php-extensions @composer;
 
-COPY "." "/var/www/app"
+COPY "./project" "/var/www/app"
 
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini;
 COPY ./runtimes/nginx_phpfpm/phpfpm/php.ini /usr/local/etc/php/conf.d/custom-php.ini
