@@ -7,7 +7,7 @@ services:
     container_name: "nginx"
     hostname: symfony7site
     ports:
-      - '80:80'
+      - '8001:80'
     networks:
       - diploma-project
     deploy:
@@ -67,6 +67,25 @@ services:
       - "8003:80"
     networks:
       - diploma-project
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '1gb'
+        reservations:
+          cpus: '1'
+          memory: '1gb'
+
+  frankenphp:
+    build:
+      context: .
+      dockerfile: "./runtimes/frankenphp/frankenphp.Dockerfile"
+    image: "diploma_frankenphp"
+    container_name: "diploma_frankenphp"
+    networks:
+      - diploma-project
+    ports:
+      - '8004:80'
     deploy:
       resources:
         limits:
