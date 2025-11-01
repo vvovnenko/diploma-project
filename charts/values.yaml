@@ -1,0 +1,18 @@
+image:
+  repository: 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr
+  pullPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+
+config:
+  POSTGRES_PORT: 5432
+  POSTGRES_HOST: myapp-db.cx02uwaiiccz.eu-north-1.rds.amazonaws.com
+  POSTGRES_USER: postgres
+  POSTGRES_DB: myapp
+  POSTGRES_PASSWORD: admin123AWS23
+

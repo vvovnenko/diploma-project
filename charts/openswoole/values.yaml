@@ -1,0 +1,5 @@
+runtime: openswoole
+
+image:
+  tag: openswoole
+

@@ -1,0 +1,6 @@
+runtime: phpfpm
+
+image:
+  nginxTag: nginx
+  phpfpmTag: phpfpm
+

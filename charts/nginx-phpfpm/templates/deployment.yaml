@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.runtime }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.runtime }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.runtime }}
+    spec:
+      containers:
+        - name: phpfpm
+          image: "{{ .Values.image.repository }}:{{ .Values.image.phpfpmTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 9001
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.runtime }}-config
+
+        - name: nginx
+          image: "{{ .Values.image.repository }}:{{ .Values.image.nginxTag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+
