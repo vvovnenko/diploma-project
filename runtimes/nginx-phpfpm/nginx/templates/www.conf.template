@@ -9,7 +9,7 @@ server {
     }
     location ~ ^/index\.php(/|$) {
         # when PHP-FPM is configured to use TCP
-        fastcgi_pass phpfpm:9000;
+        fastcgi_pass ${APP_HOST}:9000;
         fastcgi_keep_conn on;
 
         fastcgi_split_path_info ^(.+\.php)(/.*)$;

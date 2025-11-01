@@ -2,12 +2,14 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: ./runtimes/nginx_phpfpm/nginx/nginx.Dockerfile
+      dockerfile: runtimes/nginx-phpfpm/nginx/nginx.Dockerfile
     image: runtime_nginx
     container_name: "nginx"
     hostname: symfony7site
     ports:
       - '8001:80'
+    environment:
+      APP_HOST: phpfpm
     networks:
       - diploma-project
     deploy:
@@ -22,11 +24,9 @@ services:
   phpfpm:
     build:
       context: .
-      dockerfile: ./runtimes/nginx_phpfpm/phpfpm/phpfpm.Dockerfile
+      dockerfile: runtimes/nginx-phpfpm/phpfpm/phpfpm.Dockerfile
     image: runtime_phpfpm
     container_name: "phpfpm"
-    ports:
-      - "9001:9001"
     networks:
       - diploma-project
     deploy:

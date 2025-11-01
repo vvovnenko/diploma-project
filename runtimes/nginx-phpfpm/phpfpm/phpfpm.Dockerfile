@@ -21,8 +21,8 @@ RUN chmod +x /usr/local/bin/install-php-extensions && \
 COPY "./project" "/var/www/app"
 
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini;
-COPY ./runtimes/nginx_phpfpm/phpfpm/php.ini /usr/local/etc/php/conf.d/custom-php.ini
-COPY ./runtimes/nginx_phpfpm/phpfpm/www.conf /usr/local/etc/php-fpm.d/www.conf
+COPY ./runtimes/nginx-phpfpm/phpfpm/php.ini /usr/local/etc/php/conf.d/custom-php.ini
+COPY ./runtimes/nginx-phpfpm/phpfpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 WORKDIR /var/www/app
 
