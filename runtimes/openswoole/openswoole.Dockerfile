@@ -38,6 +38,7 @@ RUN rm -rf vendor && \
     php bin/console cache:warmup
 
 ENV APP_RUNTIME="Runtime\\Swoole\\Runtime"
+ENV APP_RUNTIME_TYPE="openswoole"
 
 EXPOSE 80
 

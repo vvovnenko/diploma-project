@@ -23,6 +23,8 @@ COPY ./runtimes/frankenphp/php.ini $PHP_INI_DIR/conf.d/custom-php.ini
 
 COPY "./project" "/app"
 
+ENV APP_RUNTIME_TYPE="frankenphp"
+
 RUN cd /app && \
     cp .env.example .env.local && \
     rm -rf vendor && \

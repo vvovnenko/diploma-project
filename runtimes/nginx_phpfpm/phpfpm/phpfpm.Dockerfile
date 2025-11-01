@@ -28,6 +28,8 @@ WORKDIR /var/www/app
 
 RUN cp .env .env.local
 
+ENV APP_RUNTIME_TYPE="php-fpm"
+
 RUN rm -rf vendor && \
     composer install --no-dev --no-scripts --prefer-dist --no-interaction && \
     composer dump-autoload --no-dev --classmap-authoritative && \
