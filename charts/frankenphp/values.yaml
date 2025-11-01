@@ -1,0 +1,5 @@
+runtime: frankenphp
+
+image:
+  tag: frankenphp
+

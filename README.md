@@ -27,6 +27,7 @@ docker build -t diploma-project:openswoole .  -f ./runtimes/openswoole/openswool
 docker build -t diploma-project:swoole .  -f ./runtimes/swoole/swoole.Dockerfile
 docker build -t diploma-project:nginx .  -f ./runtimes/nginx-phpfpm/nginx/nginx.Dockerfile
 docker build -t diploma-project:phpfpm .  -f ./runtimes/nginx-phpfpm/phpfpm/phpfpm.Dockerfile
+docker build -t diploma-project:frankenphp .  -f ./runtimes/frankenphp/frankenphp.Dockerfile
 ```
 
 **Додаємо тег імеджу для пушу в ECR**
@@ -35,6 +36,7 @@ docker tag diploma-project:openswoole 731464279148.dkr.ecr.eu-north-1.amazonaws.
 docker tag diploma-project:swoole 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr:swoole
 docker tag diploma-project:nginx 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr:nginx
 docker tag diploma-project:phpfpm 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr:phpfpm
+docker tag diploma-project:frankenphp 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr:frankenphp
 ```
 
 **Пушимо в ECR**
@@ -57,9 +59,19 @@ OpenSwoole
 helm upgrade --install openswoole ./openswoole -f ./values.yaml -f ./openswoole/values.yaml
 ```
 
+Swoole
+```bash
+helm upgrade --install swoole ./swoole -f ./values.yaml -f ./swoole/values.yaml
+```
+
 Nginx+PHP-FPM
 ```bash
-helm upgrade --install nginx-phpfpm ./nginx-phpfpm -f ./values.yaml -f ./nginx-phpfpm/values.yaml```
+helm upgrade --install nginx-phpfpm ./nginx-phpfpm -f ./values.yaml -f ./nginx-phpfpm/values.yaml
+```
+
+FrankenPHP
+```bash
+helm upgrade --install frankenphp ./frankenphp -f ./values.yaml -f ./frankenphp/values.yaml
 ```
 
 **Видалення Helm charts**
@@ -69,7 +81,17 @@ OpenSwoole
 helm uninstall openswoole
 ```
 
+Swoole
+```bash
+helm uninstall swoole
+```
+
 Nginx+PHP-FPM
 ```bash
 helm uninstall nginx-phpfpm 
+```
+
+FrankenPHP
+```bash
+helm uninstall frankenphp 
 ```
