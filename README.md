@@ -5,93 +5,37 @@
 **Запуск інфраструктури**
 
 ```bash
-terraform init
-terraform plan
-terraform apply
+make terraform-init
+make terraform-plan
+make terraform-apply
 ```
 
 **Видалення інфраструктури**
 ```bash
-terraform destroy
+make terraform-destroy
 ```
 
 **Вхід в AWS ECR (отримання токену логіну)**
 ```bash
-aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 731464279148.dkr.ecr.eu-north-1.amazonaws.com
+make login-ecr
 ```
-
-**Білдимо Docker image**
-
-```bash
-docker build -t diploma-project:openswoole .  -f ./runtimes/openswoole/openswoole.Dockerfile
-docker build -t diploma-project:swoole .  -f ./runtimes/swoole/swoole.Dockerfile
-docker build -t diploma-project:nginx .  -f ./runtimes/nginx-phpfpm/nginx/nginx.Dockerfile
-docker build -t diploma-project:phpfpm .  -f ./runtimes/nginx-phpfpm/phpfpm/phpfpm.Dockerfile
-docker build -t diploma-project:frankenphp .  -f ./runtimes/frankenphp/frankenphp.Dockerfile
-```
-
-**Додаємо тег імеджу для пушу в ECR**
-```bash
-docker tag diploma-project:openswoole 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr:openswoole
-docker tag diploma-project:swoole 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr:swoole
-docker tag diploma-project:nginx 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr:nginx
-docker tag diploma-project:phpfpm 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr:phpfpm
-docker tag diploma-project:frankenphp 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr:frankenphp
-```
-
-**Пушимо в ECR**
-```bash
-docker push --all-tags 731464279148.dkr.ecr.eu-north-1.amazonaws.com/diploma-ecr
-```
-
 
 **Додавання EKS кластеру в kubeconfig**
 ```bash
-aws eks update-kubeconfig \
-  --region eu-north-1 \
-  --name eks-cluster-diploma
+make kubeconfig-update
 ```
 
-**Встановлення Helm**
-
-OpenSwoole
+**Install PHP-FPM runtime in the EKS cluster**
 ```bash
-helm upgrade --install openswoole ./openswoole -f ./values.yaml -f ./openswoole/values.yaml
+make fpm-install
 ```
 
-Swoole
+**Install OpenSwoole runtime in the EKS cluster**
 ```bash
-helm upgrade --install swoole ./swoole -f ./values.yaml -f ./swoole/values.yaml
+make openswoole-install
 ```
 
-Nginx+PHP-FPM
+**Install FrankenPHP runtime in the EKS cluster**
 ```bash
-helm upgrade --install nginx-phpfpm ./nginx-phpfpm -f ./values.yaml -f ./nginx-phpfpm/values.yaml
-```
-
-FrankenPHP
-```bash
-helm upgrade --install frankenphp ./frankenphp -f ./values.yaml -f ./frankenphp/values.yaml
-```
-
-**Видалення Helm charts**
-
-OpenSwoole
-```bash
-helm uninstall openswoole
-```
-
-Swoole
-```bash
-helm uninstall swoole
-```
-
-Nginx+PHP-FPM
-```bash
-helm uninstall nginx-phpfpm 
-```
-
-FrankenPHP
-```bash
-helm uninstall frankenphp 
+make franken-install
 ```

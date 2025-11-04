@@ -23,7 +23,9 @@ COPY ./runtimes/frankenphp/php.ini $PHP_INI_DIR/conf.d/custom-php.ini
 
 COPY "./project" "/app"
 
-ENV APP_RUNTIME_TYPE="frankenphp"
+ENV APP_RUNTIME_TYPE="frankenphp_worker"
+ENV APP_RUNTIME="Runtime\\FrankenPhpSymfony\\Runtime"
+ENV FRANKENPHP_CONFIG="worker ./public/index.php"
 
 RUN cd /app && \
     cp .env.example .env.local && \
