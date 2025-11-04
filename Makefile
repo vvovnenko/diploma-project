@@ -56,6 +56,9 @@ franken-deploy: ## Deploy FrankenPHP to the EKS cluster
 franken-delete: ## Delete FrankenPHP from the EKS cluster
 	helm uninstall --ignore-not-found frankenphp
 
+franken-redeploy: ## Redeploy FrankenPHP
+franken-redeploy: franken-delete franken-deploy
+
 franken-install: ## Delete, Build, push and deploy FrankenPHP
 franken-install: franken-delete franken-build franken-tag franken-push franken-deploy
 
@@ -77,6 +80,9 @@ openswoole-deploy: ## Deploy OpenSwoole to the EKS cluster
 openswoole-delete: ## Delete OpenSwoole from the EKS cluster
 	helm uninstall --ignore-not-found openswoole
 
+openswoole-redeploy: ## Redeploy OpenSwoole
+openswoole-redeploy: openswoole-delete openswoole-deploy
+
 openswoole-install: ## Delete, Build, push and deploy OpenSwoole
 openswoole-install: openswoole-delete openswoole-build openswoole-tag openswoole-push openswoole-deploy
 
@@ -97,6 +103,9 @@ swoole-deploy: ## Deploy Swoole to the EKS cluster
 
 swoole-delete: ## Delete Swoole from the EKS cluster
 	helm uninstall --ignore-not-found swoole
+
+swoole-redeploy: ## Redeploy Swoole
+swoole-redeploy: swoole-delete swoole-deploy
 
 swoole-install: ## Delete, Build, push and deploy Swoole
 swoole-install: swoole-delete swoole-build swoole-tag swoole-push swoole-deploy
@@ -127,6 +136,9 @@ fpm-deploy: ## Deploy PHP-FPM to the EKS cluster
 
 fpm-delete: ## Delete PHP-FPM from the EKS cluster
 	helm uninstall --ignore-not-found nginx-phpfpm
+
+fpm-redeploy: ## Redeploy PHP-FPM
+fpm-redeploy: fpm-delete fpm-deploy
 
 fpm-install: ## Delete, Build, push and deploy PHP-FPM
 fpm-install: fpm-delete fpm-build fpm-tag fpm-push fpm-deploy

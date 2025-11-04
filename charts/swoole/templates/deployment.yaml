@@ -21,4 +21,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Values.runtime }}-config
+          resources:
+            limits:
+              memory: {{ .Values.MEMORY_LIMIT }}
+              cpu: {{ .Values.CPU_LIMIT }}
+            requests:
+              memory: {{ .Values.MEMORY_REQUEST }}
+              cpu: {{ .Values.CPU_REQUEST }}
+
+
 
