@@ -144,5 +144,28 @@ fpm-install: ## Delete, Build, push and deploy PHP-FPM
 fpm-install: fpm-delete fpm-build fpm-tag fpm-push fpm-deploy
 
 
+##
+## Bench runner
+##-----------------------------------------
+bench-runner-build: ## Build Bench runner image
+	docker build -t diploma-project:bench-runner .  -f ./runtimes/bench-runner/Dockerfile
+
+bench-runner-tag: ## Add tag to the Bench runner image
+	docker tag diploma-project:bench-runner $(ECR_URL):bench-runner
+
+bench-runner-push: ## Push Bench runner image
+	docker push $(ECR_URL):bench-runner
+
+bench-runner-deploy: ## Deploy Bench runner to the EKS cluster
+	helm upgrade --install bench-runner ./charts/bench-runner  -f ./charts/values.yaml -f ./charts/bench-runner/values.yaml
+
+bench-runner-delete: ## Delete Bench runner from the EKS cluster
+	helm uninstall --ignore-not-found bench-runner
+
+bench-runner-redeploy: ## Redeploy Bench runner
+bench-runner-redeploy: bench-runner-delete bench-runner-deploy
+
+bench-runner-install: ## Delete, Build, push and deploy Bench runner
+bench-runner-install: bench-runner-delete bench-runner-build bench-runner-tag bench-runner-push bench-runner-deploy
 
 
