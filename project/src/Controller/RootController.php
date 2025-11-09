@@ -22,6 +22,8 @@ final class RootController extends AbstractController
     {
         return new JsonResponse([
             'runtime' => $this->runtimeName,
+            'FRANKENPHP_WORKER' => $_SERVER['FRANKENPHP_WORKER'] ?? null,
+            'FRANKENPHP_LOOP_MAX' => $_ENV['FRANKENPHP_LOOP_MAX'] ?? $_SERVER['FRANKENPHP_LOOP_MAX'] ?? null,
         ]);
     }
 }
