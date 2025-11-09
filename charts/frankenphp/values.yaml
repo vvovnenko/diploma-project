@@ -3,3 +3,5 @@ runtime: frankenphp
 image:
   tag: frankenphp
 
+config:
+  FRANKENPHP_LOOP_MAX: 500
