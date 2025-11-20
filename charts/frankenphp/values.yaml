@@ -4,4 +4,4 @@ image:
   tag: frankenphp
 
 config:
-  FRANKENPHP_LOOP_MAX: 500
+  FRANKENPHP_LOOP_MAX: -1

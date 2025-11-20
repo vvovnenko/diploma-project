@@ -8,9 +8,9 @@ if(($_ENV['APP_RUNTIME'] ?? $_SERVER['APP_RUNTIME'] ?? '') == Runtime::class) {
         'mode'     => SWOOLE_PROCESS,
         'settings' => [
             \Swoole\Constant::OPTION_LOG_LEVEL => SWOOLE_LOG_ERROR,
-            \Swoole\Constant::OPTION_MAX_REQUEST => 500,
-            \Swoole\Constant::OPTION_REACTOR_NUM => 16,
-            \Swoole\Constant::OPTION_WORKER_NUM => 2,
+            \Swoole\Constant::OPTION_MAX_REQUEST => 0,
+            \Swoole\Constant::OPTION_REACTOR_NUM => (int) $_ENV['SWOOLE_REACTOR_NUM'] ?? $_SERVER['SWOOLE_REACTOR_NUM'] ?? 2,
+            \Swoole\Constant::OPTION_WORKER_NUM =>  (int) $_ENV['SWOOLE_WORKER_NUM'] ?? $_SERVER['SWOOLE_WORKER_NUM'] ?? 2,
         ],
     ];
 }

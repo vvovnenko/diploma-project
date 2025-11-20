@@ -1,8 +1,9 @@
 FROM openswoole/swoole:25.2-php8.3
 
-RUN set -xe; \
-    apt update; \
-    apt install unzip
+ENV DEBIAN_FRONTEND=noninteractive
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends unzip procps psmisc;
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 

@@ -3,3 +3,6 @@ runtime: openswoole
 image:
   tag: openswoole
 
+config:
+  SWOOLE_REACTOR_NUM: 2
+  SWOOLE_WORKER_NUM: 2

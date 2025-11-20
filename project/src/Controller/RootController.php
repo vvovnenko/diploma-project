@@ -24,6 +24,8 @@ final class RootController extends AbstractController
             'runtime' => $this->runtimeName,
             'FRANKENPHP_WORKER' => $_SERVER['FRANKENPHP_WORKER'] ?? null,
             'FRANKENPHP_LOOP_MAX' => $_ENV['FRANKENPHP_LOOP_MAX'] ?? $_SERVER['FRANKENPHP_LOOP_MAX'] ?? null,
+            'SWOOLE_REACTOR_NUM' => $_ENV['SWOOLE_REACTOR_NUM'] ?? $_SERVER['SWOOLE_REACTOR_NUM'] ?? null,
+            'SWOOLE_WORKER_NUM' => $_ENV['SWOOLE_WORKER_NUM'] ?? $_SERVER['SWOOLE_WORKER_NUM'] ?? null,
         ]);
     }
 }

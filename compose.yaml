@@ -95,6 +95,23 @@ services:
           cpus: '1'
           memory: '1gb'
 
+  bench-runner:
+    build:
+      context: .
+      dockerfile: "./runtimes/bench-runner/Dockerfile"
+    image: "bench_runner"
+    container_name: "bench_runner"
+    networks:
+      - diploma-project
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: '1gb'
+        reservations:
+          cpus: '1'
+          memory: '1gb'
+
 networks:
   diploma-project:
     name: diploma-project

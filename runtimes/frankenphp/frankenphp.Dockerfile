@@ -1,8 +1,10 @@
 FROM dunglas/frankenphp:latest-php8.3.1
 
-RUN set -xe; \
-    apt update; \
-    apt install unzip
+ENV DEBIAN_FRONTEND=noninteractive
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends unzip procps psmisc; \
+    rm -rf /var/lib/apt/lists/* \
 
 RUN install-php-extensions \
         exif \
@@ -35,3 +37,4 @@ RUN cd /app && \
     composer check-platform-reqs && \
     php bin/console cache:clear && \
     php bin/console cache:warmup
+

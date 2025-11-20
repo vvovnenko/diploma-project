@@ -13,7 +13,7 @@ RUN cd /tmp/wrk                           && \
 
 FROM alpine:3.12
 # it seems libgcc_s.so is dynamically linked so we need to install libgcc
-RUN apk add --no-cache libgcc curl
+RUN apk add --no-cache libgcc curl bash jq coreutils gawk
 
 COPY --from=build /wrk2/wrk /usr/bin/wrk2
 
@@ -21,9 +21,14 @@ COPY --from=build /wrk2/wrk /usr/bin/wrk2
 COPY --from=build /tmp/wrk/wrk /usr/local/bin
 #########
 
+COPY "./benchmarks" "/benchmarks"
+RUN chmod -R +x /benchmarks
+
+
 RUN adduser -D -H -u 10001 wrk_user
 USER wrk_user
 
 WORKDIR /work
 
-CMD ["bash","-lc","echo 'Loadgen pod is ready. Use: kubectl exec -it <pod> -- bash'; sleep infinity"]
+
+CMD ["sh","-c","sleep infinity"]
