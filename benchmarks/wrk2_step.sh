@@ -13,15 +13,16 @@ set -euo pipefail
 
 : "${URL:?set URL}"
 LABEL="${LABEL:-target}"
-DUR="${DUR:-2m}"
+DUR="${DUR:-1m}"
 RPS_SERIES="${RPS_SERIES:-300 360 430 500 600 720 860 1030 1240 1490}"
 THREADS="${THREADS:-$(nproc)}"
 CONNS="${CONNS:-$((THREADS*100))}"
 OUT="${OUT:-wrk2_results.jsonl}"
 WA_DUR="${WA_DUR:-1m}"
-WA_RPS="${WA_RPS:-200}"
-SLEEP_SEC="${SLEEP_SEC:-30}"
+WA_RPS="${WA_RPS:-50}"
+SLEEP_SEC="${SLEEP_SEC:-0}"
 
+echo "RPS_SERIES=${RPS_SERIES}"
 # warm-up
 echo "Warm up ${LABEL}: R=$WA_RPS t=$THREADS c=$CONNS d=$WA_DUR  → ${URL}"
 wrk2 -t"$THREADS" -c"$CONNS" -d"$WA_DUR" -R"$WA_RPS" "$URL" > /dev/null 2>&1 || true

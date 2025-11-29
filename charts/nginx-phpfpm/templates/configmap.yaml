@@ -7,3 +7,22 @@ data:
   {{ $key }}: {{ $val | quote }}
 {{- end }}
 
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.runtime }}-www-conf
+data:
+  www.conf: |
+    [www]
+    user = www-data
+    group = www-data
+    listen = 9000
+
+    pm = static
+    pm.max_children = {{ .Values.config.FPM_MAX_CHILDREN }}
+    pm.max_requests=0
+    pm.status_path = /status
+
+    catch_workers_output = yes
+

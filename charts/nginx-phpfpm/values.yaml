@@ -4,3 +4,6 @@ image:
   nginxTag: nginx
   phpfpmTag: phpfpm
 
+config:
+  FPM_MAX_CHILDREN: 2
+

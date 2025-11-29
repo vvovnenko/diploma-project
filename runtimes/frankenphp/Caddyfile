@@ -1,9 +1,9 @@
 {
 	frankenphp {
-    	num_threads 4
+    	num_threads {$FRANKENPHP_THREADS_NUM}
     	worker {
 			file ./public/index.php
-        	num 2
+        	num {$FRANKENPHP_WORKERS_NUM}
     	}
 	}
 

@@ -21,6 +21,11 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Values.runtime }}-config
+          volumeMounts:
+            - mountPath: /usr/local/etc/php-fpm.d/www.conf
+              name: {{ .Values.runtime }}-www-conf
+              subPath: www.conf
+              readOnly: true
           resources:
             limits:
               memory: {{ .Values.MEMORY_LIMIT }}
@@ -37,3 +42,10 @@ spec:
           resources:
             requests: { cpu: "200m", memory: "64Mi" }
             limits:   { cpu: "200m", memory: "64Mi" }
+      volumes:
+        - name: {{ .Values.runtime }}-www-conf
+          configMap:
+            name: {{ .Values.runtime }}-www-conf
+            items:
+              - key: www.conf
+                path: www.conf
