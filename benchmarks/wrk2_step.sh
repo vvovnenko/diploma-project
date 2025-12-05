@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
-# wrk2_step.sh — step-load для wrk2 з парсингом метрик
 # Вхідні змінні:
 #   URL          — цільовий endpoint (обов’язково)
-#   LABEL        — мітка (phpfpm|openswoole|franken...)
-#   DUR          — тривалість кроку, напр. 120s (def: 120s)
+#   LABEL        — мітка (phpfpm|openswoole|frankenphp)
+#   DUR          — тривалість кроку, напр. 1m (def: 1m)
 #   RPS_SERIES   — список RPS, пробілами (def: "500 600 720 860 1030 1240 1490 1790 2150 2580 3090")
 #   THREADS      — кількість thread-ів wrk2 (def: nproc)
 #   CONNS        — кількість з’єднань (def: 100 * THREADS)
 #   OUT          — шлях до JSONL (def: wrk2_results.jsonl)
+#   WA_DUR       — тривалість прогріву, напр. 1m  (def: 1m)
+#   WA_RPS       — RPS для прогріву  (def: 50)
+#   SLEEP_SEC    — ділей між серіями в секундах  (def: 0)
 
 set -euo pipefail
 
